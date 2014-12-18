@@ -4,6 +4,11 @@ class DrawingsController < ApplicationController
   def show
   end
 
+  def update
+    @drawing.update!(drawing_params)
+    redirect_to :back
+  end
+
   def sketchily
   end
 
@@ -11,6 +16,10 @@ class DrawingsController < ApplicationController
   end
 
   protected
+
+  def drawing_params
+    params.require(:drawing).permit(:svg)
+  end
 
   def get_drawing
     @drawing = Drawing.find(params[:id])
